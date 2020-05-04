@@ -6,7 +6,7 @@
 #define FDF_FDF_H
 # include "../libft/includes/libft.h"
 #include <fcntl.h>
-
+#include "../minilibx_macos/mlx.h"
 
 typedef struct	s_fdf
 {
@@ -14,6 +14,9 @@ typedef struct	s_fdf
 	int 		y_size;
 	int**		matrix_map;
 
+	int         zoom;
+	int         win_height;
+	int         win_width;
 	void*		mlx_pntr;
 	void*		win_pntr;
 }				t_fdf;

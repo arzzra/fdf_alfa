@@ -26,7 +26,7 @@ void    print_map(t_fdf *data)
         j = 0;
         while (j < data->x_size)
         {
-            printf("%d ",data->matrix_map[i][j]);
+            printf("%3d",data->matrix_map[i][j]);
             j++;
         }
         printf("\n");
