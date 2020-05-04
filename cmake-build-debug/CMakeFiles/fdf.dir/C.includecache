@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/arz/projects/fdf/includes/fdf.h
+../libft/includes/libft.h
+/home/arz/projects/fdf/libft/includes/libft.h
+fcntl.h
+-
+
+/home/arz/projects/fdf/libft/includes/libft.h
+string.h
+-
+unistd.h
+-
+stdlib.h
+-
+fcntl.h
+-
+
+/home/arz/projects/fdf/read_file.c
+./includes/fdf.h
+/home/arz/projects/fdf/includes/fdf.h
+

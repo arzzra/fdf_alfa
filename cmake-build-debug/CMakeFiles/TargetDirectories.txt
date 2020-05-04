@@ -1,0 +1,3 @@
+/home/arz/projects/fdf/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/arz/projects/fdf/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/arz/projects/fdf/cmake-build-debug/CMakeFiles/fdf.dir
