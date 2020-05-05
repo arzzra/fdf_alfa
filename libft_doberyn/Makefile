@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cdemetra <cdemetra@student.42.fr>          +#+  +:+       +#+         #
+#    By: doberyn <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/04/21 23:08:55 by cdemetra          #+#    #+#              #
-#    Updated: 2020/02/22 15:45:20 by cdemetra         ###   ########.fr        #
+#    Created: 2019/04/06 18:14:41 by doberyn           #+#    #+#              #
+#    Updated: 2019/04/10 18:13:02 by doberyn          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,11 @@ CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra -I. -c
 
-CFILE = get_next_line.c ft_lstnew.c ft_lstdel.c \
-		ft_putnbr_fd.c ft_putchar_fd.c ft_putnbr.c \
-		ft_putchar.c ft_strnew.c ft_atoi.c \
-		ft_strcmp.c ft_strlen.c ft_lstadd.c \
-		ft_memalloc.c ft_memcpy.c ft_strchr.c \
-		ft_strdup.c ft_strjoin.c ft_bzero.c
+CFILE = ft_atoi.c ft_error.c ft_intcpy.c \
+		ft_putchar.c ft_putnbr.c ft_putstr.c \
+		ft_strchr.c ft_strcmp.c ft_strdel.c \
+		ft_strdup.c ft_strjoin.c ft_strlen.c \
+		ft_strsplit.c ft_strsub.c get_next_line.c
 
 
 OFILE = $(CFILE:.c=.o)
