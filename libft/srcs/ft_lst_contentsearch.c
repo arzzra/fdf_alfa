@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 t_list		*ft_lst_contentsearch(t_list *lst, void *content_search)
 {
