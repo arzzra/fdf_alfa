@@ -12,9 +12,9 @@
 
 NAME = fdf
 CFLAGS = -Wall -Wextra
-SRC = main.c read_file.c create_matrix.c draw.c  f_free.c img_projection.c init.c malloc.c some_function.c
+SRC = main.c read_file.c create_matrix.c draw.c  f_free.c img_projection.c init.c malloc.c some_function.c keys_hook.c
 OBJ = $(SRC:.c=.o)
-LIBX = -lm -I/usr/X11/include -L/usr/X11/lib -lX11 -lXext -lmlx -L /libft/ -lft
+LIBX = -lmlx -lm -lft -L libft/ -L ./minilibx_macos/ -framework OpenGL -framework AppKit
 LIBXL = -lm -L libft/ -lft -L/usr/lib/X11 -lmlx -lXext -lX11
 
 

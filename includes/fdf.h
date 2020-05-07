@@ -16,7 +16,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdio.h>
-#include <mlx.h>
+#include "../minilibx_macos/mlx.h"
 #include <math.h>
 
 
@@ -64,6 +64,7 @@ typedef struct			s_fdf
 	void				*mlx_pntr;
 	void				*win_pntr;
 }						t_fdf;
+
 
 /*
  *	malloc.c
@@ -113,5 +114,11 @@ int		ret_min(int a, int b);
  */
 
 void	draw(t_fdf *data);
+
+/*
+ *	keys_hook.c
+ */
+
+int		keys_hook(int key, t_fdf *data);
 
 # endif

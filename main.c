@@ -33,7 +33,7 @@ int		main(int ac, char **av)
 			{
 				printf("bpp = %d  s_lize = %d ENDIAN = %d \n" , data->b_p_p, data->size_line, data->endian);
 				draw(data);
-				// mlx_key_hook(data->win_pntr, keys_hook, data);
+				mlx_key_hook(data->win_pntr, keys_hook, data);
 				// mlx_expose_hook(e.win, expose_hook, &e);
 				mlx_loop(data->mlx_pntr);
 			}
