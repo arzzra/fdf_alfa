@@ -120,5 +120,7 @@ void	draw(t_fdf *data);
  */
 
 int		keys_hook(int key, t_fdf *data);
+void 	move(int key, t_fdf *data);
+void 	zoom(int key, t_fdf *data);
 
 # endif
