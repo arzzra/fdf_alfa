@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 02:56:02 by arz               #+#    #+#             */
-/*   Updated: 2020/05/06 02:56:02 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/08 16:40:04 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 # include "../libft/includes/libft.h"
 #include <fcntl.h>
 #include <stdio.h>
-#include <stdio.h>
 #include "../minilibx_macos/mlx.h"
 #include <math.h>
+#include <limits.h>
 
 
 # define X_S_WIN		1600
 # define Y_S_WIN		900
+
+# define COLOR1 {0x000000, 0x808080, 0xFFFFFF}
 
 typedef struct			s_coord
 {
@@ -49,7 +51,6 @@ typedef struct 			s_map
 	int 				x_size;
 	int 				y_size;
 	int					**matrix_map;
-	int					**color_map;
 }						t_map;
 
 typedef struct			s_fdf
@@ -59,6 +60,9 @@ typedef struct			s_fdf
 	int					b_p_p;
 	int					size_line;
 	int					endian;
+	int					max_z;
+	int					min_z;
+	int					med_z;
 	t_cam				*cam;
 	t_map				*map;
 	void				*mlx_pntr;
@@ -122,5 +126,11 @@ void	draw(t_fdf *data);
 int		keys_hook(int key, t_fdf *data);
 void 	move(int key, t_fdf *data);
 void 	zoom(int key, t_fdf *data);
+
+/*
+ *	color.c
+ */
+
+int		linear_interpolation(t_coord *start, t_coord *end, int *x_y_current, int *delta);
 
 # endif

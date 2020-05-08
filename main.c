@@ -28,7 +28,7 @@ int		main(int ac, char **av)
 	{
 		if (read_file(data, av[1]))
 		{
-			print_map(data);
+			// print_map(data);
 			if (init_fdf(data))
 			{
 				printf("bpp = %d  s_lize = %d ENDIAN = %d \n" , data->b_p_p, data->size_line, data->endian);
