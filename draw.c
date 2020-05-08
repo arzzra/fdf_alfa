@@ -6,15 +6,11 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/05 18:07:24 by arz               #+#    #+#             */
-/*   Updated: 2020/05/07 02:08:59 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/08 16:39:38 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
-
-# define BRICK_RED	0xC2294E
-
-
 
 void	init_background(t_fdf *data)
 {
@@ -24,7 +20,7 @@ void	init_background(t_fdf *data)
 
 	img_adrr = (int*)data->data_addr;
 	i = 0;
-	color = BRICK_RED;
+	color = 0x222222;
 	while (i < X_S_WIN * Y_S_WIN)
 	{
 		img_adrr[i] = 0x222222;
@@ -45,8 +41,7 @@ void		pixel_putting(t_fdf *data, int *x_y, int color)
 {
 	int		pos;
 
-	color = BRICK_RED;
-	mlx_pixel_put(data->mlx_pntr, data->win_pntr, 0, 0, 0x222222);
+	// mlx_pixel_put(data->mlx_pntr, data->win_pntr, 0, 0, 0x222222);
 	if (x_y[0] >= 0 && x_y[0] < X_S_WIN && x_y[1] >= 0 && x_y[1] < Y_S_WIN)
 	{
 		pos = (x_y[0] * data->b_p_p / 8) + (x_y[1] * data->size_line);
@@ -66,10 +61,9 @@ void		paint_line(t_fdf *data, t_coord a, t_coord b)
 	init_delta_error_sign(&a, &b, delta, sign, error);
 	x_y[0] = a.x;
 	x_y[1] = a.y;
-	// printf(" x= %d y= %d\n", x_y[0], x_y[1]);
 	while (x_y[0] != b.x || x_y[1] != b.y)
 	{
-		pixel_putting(data, x_y, 0xe80c0c);
+		pixel_putting(data, x_y, linear_interpolation(&a, &b, x_y, delta));
 		if ((error[1] = error[0] * 2) > (-delta[1]))
 		{
 			error[0] -= delta[1];

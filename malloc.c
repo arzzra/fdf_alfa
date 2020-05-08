@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 02:57:39 by arz               #+#    #+#             */
-/*   Updated: 2020/05/07 02:08:59 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/08 16:40:41 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_map	*malloc_t_map(void)
 
 	if ((mp = (t_map*)malloc(sizeof(t_map))))
 	{
-		mp->color_map = NULL;
 		mp->matrix_map = NULL;
 		mp->x_size = -1;
 		mp->y_size = 0;
@@ -33,7 +32,7 @@ t_cam	*malloc_t_cam(void)
 
 	if ((cm = (t_cam*)malloc(sizeof(t_cam))))
 	{
-		cm->zoom = 0;
+		cm->zoom = 1;
 		cm->x_move = 0;
 		cm->y_move = 0;
 		cm->x_angle = 0;
