@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 16:09:29 by arz               #+#    #+#             */
-/*   Updated: 2020/05/08 22:47:57 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/09 00:01:16 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ t_coord	init_points(t_fdf *data, int x, int y)
 	crd.x = x;
 	crd.y = y;
 	crd.z = data->map->matrix_map[y][x];
-	if (crd.z > 0)
-		crd.col = 0x00ff00;
-	else
-		crd.col = 0xff0000;
+	crd.col = level_color(data, crd.z);
 	img_projection(data, &crd);
 	return (crd);
 }

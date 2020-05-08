@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 02:56:02 by arz               #+#    #+#             */
-/*   Updated: 2020/05/08 22:52:15 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/09 00:01:55 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct 			s_map
 	int 				y_size;
 	int					**matrix_map;
 	int					color_id;
+	int					**colors;
 }						t_map;
 
 typedef struct			s_fdf
@@ -63,7 +64,8 @@ typedef struct			s_fdf
 	int					endian;
 	int					max_z;
 	int					min_z;
-	int					med_z;
+	int					_3z;
+	int					_6z;
 	t_cam				*cam;
 	t_map				*map;
 	void				*mlx_pntr;
@@ -133,5 +135,7 @@ void 	zoom(int key, t_fdf *data);
  */
 
 int		linear_interpolation(t_coord *start, t_coord *end, int *x_y_current, int *delta);
+int		**getcolor(void);
+int		level_color(t_fdf *data, int z);
 
 # endif

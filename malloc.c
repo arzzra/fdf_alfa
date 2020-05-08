@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 02:57:39 by arz               #+#    #+#             */
-/*   Updated: 2020/05/08 22:59:49 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/09 00:02:24 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ t_map	*malloc_t_map(void)
 		mp->x_size = -1;
 		mp->y_size = 0;
 		mp->color_id = 0;
+		if (!(mp->colors = getcolor()))
+		{
+			free(mp);
+			return (NULL);
+		}
 	}
 	return (mp);
 }

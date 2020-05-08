@@ -6,54 +6,63 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 23:08:43 by arz               #+#    #+#             */
-/*   Updated: 2020/05/08 22:48:33 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/09 00:01:03 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
 
 
-// int		*putcolor(int a, int b, int c)
-// {
-// 	int		*color;
+int		*putcolor(int a, int b, int c)
+{
+	int		*color;
 
-// 	color = malloc(sizeof(int) * 3);
-// 	color[0] = a;
-// 	color[1] = b;
-// 	color[2] = c;
-// 	return (color);
-// }
+	if (!(color = malloc(sizeof(int) * 3)))
+		return (NULL);
+	color[0] = a;
+	color[1] = b;
+	color[2] = c;
+	return (color);
+}
 
-// int		**getcolor(char **av, int ac)
-// {
-// 	int		**color;
+int		**getcolor(void)
+{
+	int		**color;
+	int		i;
 
-// 	color = malloc(sizeof(int *) * 5);
+	if (!(color = malloc(sizeof(int *) * 5)))
+		return (NULL);
+	if (!(color[0] = putcolor(0x000000, 0x808080, 0xFFFFFF)))
+		return (NULL);
+	if (!(color[1] = putcolor(0x0070e0, 0x42c6ff, 0xf3d85e)))
+		return (NULL);
+	if (!(color[2] = putcolor(0xb9280e, 0x3d231a, 0x27160c)))
+		return (NULL);
+	if (!(color[2] = putcolor(0xb9280e, 0x3d231a, 0x27160c)))
+		return (NULL);
+	if (!(color[3] = putcolor(0x124511, 0x1a0f0f, 0x888181)))
+		return (NULL);
+	if (!(color[4] = putcolor(0x0000ff, 0x00ff00, 0xff0000)))
+		return (NULL);
+	return (color);
+}
 
-// 	color[0] = putcolor(0x000000, 0x808080, 0xFFFFFF);
-// 	color[1] = putcolor(0x0070e0, 0x42c6ff, 0xf3d85e);
-// 	color[2] = putcolor(0xb9280e, 0x3d231a, 0x27160c);
-// 	color[3] = putcolor(0x124511, 0x1a0f0f, 0x888181);
-// 	color[4] = putcolor(0x0000ff, 0x00ff00, 0xff0000);
-// 	return (color);
-// }
-
-// int		level_color(t_fdf *data, int z)
-// {
-// 	if (z <= e->z_mid && z >= e->z_min)
-// 	{
-// 		color.color1 = e->color[e->cnum][0];
-// 		color.color2 = e->color[e->cnum][1];
-// 		return (findcolor(&color, z, e->z_min, e->z_mid));
-// 	}
-// 	else if (z <= e->z_max && z >= e->z_mid)
-// 	{
-// 		color.color1 = e->color[e->cnum][1];
-// 		color.color2 = e->color[e->cnum][2];
-// 		return (findcolor(&color, z, e->z_mid, e->z_max));
-// 	}
-// 	return (0);
-// }
+int		level_color(t_fdf *data, int z)
+{
+	if (z <= data->_3z && z >= data->min_z)
+	{
+		return (data->map->colors[data->map->color_id][0]);
+	}
+	else if (z <= data->_6z && z > data->_3z)
+	{
+		return (data->map->colors[data->map->color_id][1]);
+	}
+	else if (z >= data->_6z && z > data->_6z)
+	{
+		return (data->map->colors[data->map->color_id][2]);
+	}
+	return (0);
+}
 
 double	t_calculate(int a, int b, int c)
 {
