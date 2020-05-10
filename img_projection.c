@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 15:55:48 by arz               #+#    #+#             */
-/*   Updated: 2020/05/08 19:42:25 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/10 15:37:46 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,5 @@ void	img_projection(t_fdf *data, t_coord *crd)
 	if (data->cam->isometria > 0)
 		isometria(data, crd);
 	crd->x += (X_S_WIN) / 2 + data->cam->x_move;
-	crd->y += (Y_S_WIN + data->map->y_size * data->cam->zoom) / 2 + data->cam->y_move;
-//	crd->x += (X_S_WIN) / 2;
-//	crd->y += (Y_S_WIN) / 2;
+	crd->y += (Y_S_WIN + data->map->y_size * data->cam->zoom) / 3 + data->cam->y_move;
 }

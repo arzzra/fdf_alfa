@@ -6,13 +6,14 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 02:56:02 by arz               #+#    #+#             */
-/*   Updated: 2020/05/09 00:01:55 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/10 15:53:13 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_FDF_H
 #define FDF_FDF_H
 # include "../libft/includes/libft.h"
+# include "controls_keys.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include "../minilibx_macos/mlx.h"

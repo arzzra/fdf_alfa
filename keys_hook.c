@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 01:59:08 by arz               #+#    #+#             */
-/*   Updated: 2020/05/08 19:53:04 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/10 16:33:12 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,32 @@ void 	spin(int key, t_fdf *data)
 {
 	float spin_val;
 
-	spin_val = 5 * M_PI / 180;
-	if (key == 89 || key == 91 || key == 92)
-		data->cam->x_angle -= spin_val;
-	if (key == 86 || key == 89 || key == 83)
-		data->cam->y_angle -= spin_val;
-	if (key == 83 || key == 84 || key == 85)
-		data->cam->x_angle += spin_val;
-	if (key == 88 || key == 92 || key == 85)
-		data->cam->y_angle += spin_val;
-	if (key == 87)
-	{
-		data->cam->y_angle = 0;
-		data->cam->x_angle = 0;
-	}
+	spin_val = 0.05;
+	if (key == NUMPAD_8)
+		data->cam->x_angle += 0.05;
+	else if (key == NUMPAD_2)
+		data->cam->x_angle -= 0.05;
+	else if (key == NUMPAD_4)
+		data->cam->y_angle -= 0.05;
+	else if (key == NUMPAD_6)
+		data->cam->y_angle += 0.05;
+	else if (key == NUMPAD_1)
+		data->cam->z_angle += 0.05;
+	else if (key == NUMPAD_3)
+		data->cam->z_angle -= 0.05;
+	// if (key == 89 || key == 91 || key == 92)
+	// 	data->cam->x_angle -= spin_val;
+	// if (key == 86 || key == 89 || key == 83)
+	// 	data->cam->y_angle -= spin_val;
+	// if (key == 83 || key == 84 || key == 85)
+	// 	data->cam->x_angle += spin_val;
+	// if (key == 88 || key == 92 || key == 85)
+	// 	data->cam->y_angle += spin_val;
+	// if (key == 87)
+	// {
+	// 	data->cam->y_angle = 0;
+	// 	data->cam->x_angle = 0;
+	// }
 	draw(data);
 }
 
@@ -69,7 +81,7 @@ int 	change_color(int key, t_fdf *data)
 	int color;
 
 	color = data->map->color_id;
-	if (key == 47)
+	if (key == 47 || key == 65365)
 	{
 		if (color == 4)
 			data->map->color_id = 0;
@@ -127,15 +139,15 @@ int		keys_hook(int key, t_fdf *data)
 	printf("keys = %d \n", key);
 	if (key == 53)
 		exit(0);
-	else if (key >= 123 && key <= 126)
+	else if ((key >= 123 && key <= 126))
 		move(key, data);
 	else if (key == 105 || key == 34)
 		isometr(key, data);
 	else if (key == 69 || key == 78 || key == 82 || key == 65451 || key == 65453)
 		zoom(key, data);
-	else if (key <= 92 && key >= 83 && key != 90)
+	else if ((key <= 92 && key >= 83 && key != 90) || (key >= 65429 && key <= 65437))
 		spin(key, data);
-	else if (key == 47 || key == 43)
+	else if (key == 47 || key == 43 || key == 65365 || key == 65366)
 		change_color(key, data);
 	else if (key >= 21 && key <= 23)
 		change_deep(key, data);
