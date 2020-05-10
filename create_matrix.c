@@ -37,19 +37,6 @@ void	list_to_matrix(int *matrix, t_list *lst, int x_size)
 	}
 }
 
-int		free_lst(t_list *lst)
-{
-	t_list	*lsk;
-
-	while (lst)
-	{
-		lsk = lst;
-		lst = lst->next;
-		free(lsk->content);
-		free(lsk);
-	}
-	return (0);
-}
 
 
 
@@ -61,18 +48,18 @@ int 	create_matrix(t_fdf *data, t_list *lsk)
 
 	lst = lsk;
 	matrix = NULL;
-	if ((matrix = (int**)malloc(sizeof(int*) * data->y_size)))
+	if ((matrix = (int**)malloc(sizeof(int*) * data->map->y_size)))
 	{
 		i = 0;
-		while (i < data->y_size && lst)
+		while (i < data->map->y_size && lst)
 		{
-			if (!(matrix[i] = (int*)malloc(sizeof(int) * data->x_size)))
+			if (!(matrix[i] = (int*)malloc(sizeof(int) * data->map->x_size)))
 				return (0);
-			list_to_matrix(matrix[i], lst, data->x_size);
+			list_to_matrix(matrix[i], lst, data->map->x_size);
 			i++;
 			lst = lst->next;
 		}
-		data->matrix_map = matrix;
+		data->map->matrix_map = matrix;
 	}
 	if (!matrix)
 		return (free_lst(lsk));

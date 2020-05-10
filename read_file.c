@@ -58,31 +58,25 @@ t_list	*add_lst(t_list *head, char *line)
 t_list	*save_on_list(int fd, t_fdf *data)
 {
 	char	*line;
-	int 	y;
-	int		x;
 	t_list	*ret;
 
-	y = 0;
-	x = -1;
 	ret = NULL;
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (x == -1)
-			x = counter_digits(line);
-		else if ((counter_digits(line)) != x)
+		if (data->map->x_size == -1)
+			data->map->x_size = counter_digits(line);
+		else if ((counter_digits(line)) != data->map->x_size)
 		{
-		    free(line);
-		    return (free_lst(ret));
+			free(line);
+			return (free_lst(ret) == 0 ? NULL : NULL);
 		}
 		if (!(ret = add_lst(ret, line)))
 		{
-            free(line);
-            return (free_lst(ret));
-        }
-		y++;
+			free(line);
+			return (free_lst(ret) == 0 ? NULL : NULL);
+		}
+		data->map->y_size++;
 	}
-	data->y_size = y;
-	data->x_size = x;
 	return (ret);
 }
 
@@ -95,11 +89,12 @@ int 	read_file(t_fdf *data, char *f_name)
 	{
 		if (!(lst = save_on_list(fd, data)))
 		{
-		    printf("Error read\n");
-            return (0);
-        }
+			printf("Error read\n");
+			return (0);
+		}
 		if (!(create_matrix(data, lst)))
 			return (0);
+		free_lst(lst);
 		return (1);
 	}
     printf("Error! Bad name file\n");
