@@ -1,3 +1,8 @@
 cmake-build-debug/
 .idea
 CMakeLists.txt
+fdf
+libft/libft.a
+libft/objects/additional.o
+*.o
+*.a

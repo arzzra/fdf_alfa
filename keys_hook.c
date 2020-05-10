@@ -20,14 +20,17 @@ void 	zoom(int key, t_fdf *data)
 
 	zoom_val = 5;
 	cur_zoom = data->cam->zoom;
-	if ((cur_zoom <= 5 && (key == 78 || key == 5)) || (cur_zoom >= 75 && (key == 69 || key == 4)))
+	if ((cur_zoom <= 5 && (key == ZOOM_MINUS_L || key == ZOOM_MINUS_M || key == 5))
+			|| (cur_zoom >= 100 && (key == ZOOM_PLUS_L || key == ZOOM_PLUS_M
+				||  key == 4)))
 		return;
-	if (key == 69 || key == 65451 || key == 4)
+	if (key == ZOOM_PLUS_L || key == ZOOM_PLUS_M || key == 4)
 		data->cam->zoom += zoom_val;
-	else if (key == 78 || key == 65453 || key == 5)
+	else if (key == ZOOM_MINUS_L || key == ZOOM_MINUS_M || key == 5)
 		data->cam->zoom -= zoom_val;
 	else
-		data->cam->zoom = 40;
+		data->cam->zoom = ret_min((X_S_WIN / data->map->x_size / 2),
+			(Y_S_WIN / data->map->y_size / 2));
 	draw(data);
 }
 
@@ -36,42 +39,20 @@ void 	spin(int key, t_fdf *data)
 	float spin_val;
 
 	spin_val = 0.05;
-	if (key == NUMPAD_8)
-		data->cam->x_angle += 0.05;
-	else if (key == NUMPAD_2)
-		data->cam->x_angle -= 0.05;
-	else if (key == NUMPAD_4)
-		data->cam->y_angle -= 0.05;
-	else if (key == NUMPAD_6)
-		data->cam->y_angle += 0.05;
-	else if (key == NUMPAD_1)
-		data->cam->z_angle += 0.05;
-	else if (key == NUMPAD_3)
-		data->cam->z_angle -= 0.05;
-	// if (key == 89 || key == 91 || key == 92)
-	// 	data->cam->x_angle -= spin_val;
-	// if (key == 86 || key == 89 || key == 83)
-	// 	data->cam->y_angle -= spin_val;
-	// if (key == 83 || key == 84 || key == 85)
-	// 	data->cam->x_angle += spin_val;
-	// if (key == 88 || key == 92 || key == 85)
-	// 	data->cam->y_angle += spin_val;
-	// if (key == 87)
-	// {
-	// 	data->cam->y_angle = 0;
-	// 	data->cam->x_angle = 0;
-	// }
-	draw(data);
-}
-
-void	isometr(int key, t_fdf *data)
-{
-	if (key == 105 || key == 34)
+	if (key == NUMPAD_8_L || key == NUMPAD_8_M)
+		data->cam->x_angle -= spin_val;
+	else if (key == NUMPAD_2_L|| key == NUMPAD_2_M)
+		data->cam->x_angle += spin_val;
+	else if (key == NUMPAD_4_L || key == NUMPAD_4_M)
+		data->cam->y_angle -= spin_val;
+	else if (key == NUMPAD_6_L || key == NUMPAD_6_M)
+		data->cam->y_angle += spin_val;
+	else if (key == NUMPAD_1_L || key == NUMPAD_1_M)
+		data->cam->z_angle += spin_val;
+	else if (key == NUMPAD_3_L || key == NUMPAD_3_M)
+		data->cam->z_angle -= spin_val;
+	else if (key == NUMPAD_5_L || key == NUMPAD_5_M)
 	{
-		if (data->cam->isometria >= 0 && data->cam->isometria < 2)
-			data->cam->isometria += 1;
-		else
-			data->cam->isometria = 0;
 		data->cam->x_angle = 0;
 		data->cam->y_angle = 0;
 		data->cam->z_angle = 0;
@@ -79,25 +60,27 @@ void	isometr(int key, t_fdf *data)
 	draw(data);
 }
 
-int 	change_color(int key, t_fdf *data)
+void	isometry(t_fdf *data)
+{
+	if (data->cam->isometria >= 0 && data->cam->isometria < 2)
+		data->cam->isometria += 1;
+	else
+		data->cam->isometria = 0;
+	data->cam->x_angle = 0;
+	data->cam->y_angle = 0;
+	data->cam->z_angle = 0;
+	draw(data);
+}
+
+int 	change_color(t_fdf *data)
 {
 	int color;
 
 	color = data->map->color_id;
-	if (key == 47 || key == 65365)
-	{
-		if (color == 4)
-			data->map->color_id = 0;
-		else
-			data->map->color_id += 1;
-	}
+	if (color == 4)
+		data->map->color_id = 0;
 	else
-	{
-		if (color == 0)
-			data->map->color_id = 4;
-		else
-			data->map->color_id -= 1;
-	}
+		data->map->color_id += 1;
 	draw(data);
 	return (0);
 }
@@ -108,11 +91,11 @@ int move(int key, t_fdf *data)
 
 	printf("data->cam->x_move -- %d ----- data->cam->y_move -- %d\n", data->cam->x_move, data->cam->y_move);
 	move_val = 6;
-	if (key == 126)
+	if (key == UP_M || key == UP_L)
 		data->cam->y_move -= move_val;
-	else if (key == 125)
+	else if (key == DOWN_M || key == DOWN_L)
 		data->cam->y_move += move_val;
-	else if (key == 123)
+	else if (key == LEFT_M || key == LEFT_L)
 		data->cam->x_move -= move_val;
 	else
 		data->cam->x_move += move_val;
@@ -124,17 +107,19 @@ int move(int key, t_fdf *data)
 int change_deep(int key, t_fdf *data)
 {
 	float deep_val;
+	float cur_deep;
 
-	printf("data->cam->z_deep -- %f \n", data->cam->z_deep);
 	deep_val = 0.05;
-	if (key == 21 || key == 46)
-		data->cam->z_deep += deep_val;
-	else if (key == 22 || key == 44)
+	cur_deep = data->cam->z_deep;
+	printf("data->cam->z_deep -- %f \n", cur_deep);
+	if (cur_deep >= 10.0 && (key == DEEP_MINUS_L || key == DEEP_MINUS_M))
+		return (0);
+	if (cur_deep <= 0.1  && (key == DEEP_PLUS_L || key == DEEP_PLUS_M))
+		return (0);
+	if (key == DEEP_PLUS_L || key == DEEP_PLUS_M)
 		data->cam->z_deep -= deep_val;
-	if (data->cam->z_deep > 10)
-		data->cam->z_deep = 10;
-	else if (data->cam->z_deep < 0.1)
-		data->cam->z_deep = 0.1;
+	else if (key == DEEP_MINUS_L || key == DEEP_MINUS_M)
+		data->cam->z_deep += deep_val;
 	draw(data);
 	return (0);
 }
@@ -142,21 +127,22 @@ int change_deep(int key, t_fdf *data)
 int		keys_hook(int key, t_fdf *data)
 {
 	printf("keys = %d \n", key);
-	if (key == 53)
+	if (key == ESC_L || key == ESC_M)
 		exit(0);
-	else if ((key >= 21 && key <= 23) || key == 46 || key == 44)
+	else if (key == DEEP_MINUS_L || key == DEEP_MINUS_M ||
+			key == DEEP_PLUS_L || key == DEEP_PLUS_M)
 		change_deep(key, data);
-	else if ((key >= 123 && key <= 126))
+	else if ((key >= LEFT_M && key <= UP_M) || (key >= LEFT_L && key <= DOWN_L))
 		move(key, data);
-	else if (key == 105 || key == 34)
-		isometr(key, data);
-	else if (key == 69 || key == 78 || key == 82 || key == 65451 || key == 65453)
+	else if (key == ISOMETRY_M || key == ISOMETRY_L)
+		isometry(data);
+	else if (key == ZOOM_PLUS_M || key == ZOOM_MINUS_M || key == ZOOM_ZERO_M
+			|| key == ZOOM_PLUS_L || key == ZOOM_MINUS_L || key == ZOOM_ZERO_L)
 		zoom(key, data);
-	else if ((key <= 92 && key >= 83 && key != 90) || (key >= 65429 && key <= 65437))
+	else if ((key <= NUMPAD_9_M && key >= NUMPAD_1_M)
+			|| (key >= NUMPAD_4_L && key <= NUMPAD_1_L))
 		spin(key, data);
-	else if (key == 47 || key == 43 || key == 65365 || key == 65366)
-		change_color(key, data);
-	else if (key >= 21 && key <= 23 && key == 46 && key == 44)
-		change_deep(key, data);
+	else if (key == COLOR_M || key == COLOR_L)
+		change_color(data);
 	return (0);
 }
