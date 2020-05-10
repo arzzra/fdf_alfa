@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 01:59:08 by arz               #+#    #+#             */
-/*   Updated: 2020/05/10 16:33:12 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/10 17:29:11 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ void	isometr(int key, t_fdf *data)
 			data->cam->isometria += 1;
 		else
 			data->cam->isometria = 0;
+		data->cam->x_angle = 0;
+		data->cam->y_angle = 0;
+		data->cam->z_angle = 0;
 	}
 	draw(data);
 }
@@ -120,16 +123,18 @@ int move(int key, t_fdf *data)
 
 int change_deep(int key, t_fdf *data)
 {
-	int deep_val;
+	float deep_val;
 
 	printf("data->cam->z_deep -- %f \n", data->cam->z_deep);
-	deep_val = 10;
-	if (key == 21)
-		data->cam->z_deep -= deep_val;
-	else if (key == 22)
+	deep_val = 0.05;
+	if (key == 21 || key == 46)
 		data->cam->z_deep += deep_val;
-	else
-		data->cam->y_move = 0;
+	else if (key == 22 || key == 44)
+		data->cam->z_deep -= deep_val;
+	if (data->cam->z_deep > 10)
+		data->cam->z_deep = 10;
+	else if (data->cam->z_deep < 0.1)
+		data->cam->z_deep = 0.1;
 	draw(data);
 	return (0);
 }
@@ -139,6 +144,8 @@ int		keys_hook(int key, t_fdf *data)
 	printf("keys = %d \n", key);
 	if (key == 53)
 		exit(0);
+	else if ((key >= 21 && key <= 23) || key == 46 || key == 44)
+		change_deep(key, data);
 	else if ((key >= 123 && key <= 126))
 		move(key, data);
 	else if (key == 105 || key == 34)
@@ -149,7 +156,7 @@ int		keys_hook(int key, t_fdf *data)
 		spin(key, data);
 	else if (key == 47 || key == 43 || key == 65365 || key == 65366)
 		change_color(key, data);
-	else if (key >= 21 && key <= 23)
+	else if (key >= 21 && key <= 23 && key == 46 && key == 44)
 		change_deep(key, data);
 	return (0);
 }

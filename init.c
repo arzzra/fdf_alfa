@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 14:54:36 by arz               #+#    #+#             */
-/*   Updated: 2020/05/08 23:49:46 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/10 17:02:51 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int		init_fdf(t_fdf *data)
 	data->data_addr = mlx_get_data_addr(data->img, &(data->b_p_p),
 	&(data->size_line), &(data->endian));
 	z_min_max(data);
-//	data->cam->zoom = ret_min((X_S_WIN / data->map->x_size / 2), (Y_S_WIN / data->map->y_size / 2));
-	data->cam->zoom = 30;
+	data->cam->zoom = ret_min((X_S_WIN / data->map->x_size / 2), (Y_S_WIN / data->map->y_size / 2));
 	return (1);
 }

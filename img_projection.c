@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 15:55:48 by arz               #+#    #+#             */
-/*   Updated: 2020/05/10 15:37:46 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/10 17:15:55 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	img_projection(t_fdf *data, t_coord *crd)
 {
 	crd->x *= data->cam->zoom;
 	crd->y *= data->cam->zoom;
-	crd->z *= data->cam->zoom;
+	crd->z *= (data->cam->zoom / data->cam->z_deep);
 	crd->x -= (data->map->x_size * data->cam->zoom) / 2;
 	crd->y -= (data->map->y_size * data->cam->zoom) / 2;
 	x_rotate(data, crd);

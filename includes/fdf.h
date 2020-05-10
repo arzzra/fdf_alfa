@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 02:56:02 by arz               #+#    #+#             */
-/*   Updated: 2020/05/10 15:53:13 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/10 17:20:32 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct	s_cam
 	int			zoom;
 	int			x_move;
 	int			y_move;
-	double		z_deep;
+	float		z_deep;
 	double		x_angle;
 	double		y_angle;
 	double		z_angle;
