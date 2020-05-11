@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/06 02:57:39 by arz               #+#    #+#             */
+/*   Updated: 2020/05/12 02:05:58 by arz              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "./includes/fdf.h"
 
 int		counter_digits(char *line)
 {
-	int 	i;
-	int 	counter;
-	int		flg;
+	int	i;
+	int	counter;
+	int	flg;
 
 	i = 0;
 	counter = 0;
@@ -24,6 +35,8 @@ int		counter_digits(char *line)
 		}
 		else if (line[i] == ' ')
 			flg = 0;
+		else
+			return (0);
 		i++;
 	}
 	return (counter);
@@ -80,24 +93,27 @@ t_list	*save_on_list(int fd, t_fdf *data)
 	return (ret);
 }
 
-int 	read_file(t_fdf *data, char *f_name)
+int		read_file(t_fdf *data, char *f_name)
 {
-	int 	fd;
+	int		fd;
 	t_list	*lst;
 
 	if ((fd = open(f_name, O_RDONLY)) > 1)
 	{
 		if (!(lst = save_on_list(fd, data)))
 		{
-			printf("Error read\n");
+			ft_printf("Error read from file\n");
 			return (0);
 		}
 		if (!(create_matrix(data, lst)))
+		{
+			ft_printf("Error init map\n");
 			return (0);
+		}
 		free_lst(lst);
+		close(fd);
 		return (1);
 	}
-    printf("Error! Bad name file\n");
+	ft_printf("Error! Bad file name\n");
 	exit(1);
-	return (0);
 }

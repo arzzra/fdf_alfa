@@ -6,12 +6,11 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 23:08:43 by arz               #+#    #+#             */
-/*   Updated: 2020/05/09 00:01:03 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/12 02:08:50 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
-
 
 int		*putcolor(int a, int b, int c)
 {
@@ -28,9 +27,8 @@ int		*putcolor(int a, int b, int c)
 int		**getcolor(void)
 {
 	int		**color;
-	int		i;
 
-	if (!(color = malloc(sizeof(int *) * 5)))
+	if (!(color = malloc(sizeof(int *) * 6)))
 		return (NULL);
 	if (!(color[0] = putcolor(0x000000, 0x808080, 0xFFFFFF)))
 		return (NULL);
@@ -38,11 +36,11 @@ int		**getcolor(void)
 		return (NULL);
 	if (!(color[2] = putcolor(0xb9280e, 0x3d231a, 0x27160c)))
 		return (NULL);
-	if (!(color[2] = putcolor(0xb9280e, 0x3d231a, 0x27160c)))
+	if (!(color[3] = putcolor(0x7CFC00, 0x90EE90, 0xFF4500)))
 		return (NULL);
-	if (!(color[3] = putcolor(0x124511, 0x1a0f0f, 0x888181)))
+	if (!(color[4] = putcolor(0x124511, 0x1a0f0f, 0x888181)))
 		return (NULL);
-	if (!(color[4] = putcolor(0x0000ff, 0x00ff00, 0xff0000)))
+	if (!(color[5] = putcolor(0x0000ff, 0x00ff00, 0xff0000)))
 		return (NULL);
 	return (color);
 }
@@ -77,10 +75,10 @@ double	t_calculate(int a, int b, int c)
 		return ((double)chis / znam);
 }
 
-int		linear_interpolation(t_coord *start, t_coord *end, int *x_y_current, int *delta)
+int		linear_interpolation(t_coord *start, t_coord *end,
+	int *x_y_current, int *delta)
 {
 	int		color[3];
-	int		color2;
 	double	t;
 	int		part1;
 	int		part2;

@@ -6,13 +6,14 @@
 #    By: arz <arz@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/05 17:10:24 by arz               #+#    #+#              #
-#    Updated: 2020/05/08 01:44:19 by arz              ###   ########.fr        #
+#    Updated: 2020/05/11 23:25:44 by arz              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 CFLAGS = -Wall -Wextra
-SRC = main.c read_file.c create_matrix.c draw.c  f_free.c img_projection.c init.c malloc.c some_function.c keys_hook.c color.c
+SRC = main.c read_file.c create_matrix.c draw.c  f_free.c img_projection.c \
+		init.c malloc.c some_function.c keys_hook.c color.c keys_hook_additional.c
 OBJ = $(SRC:.c=.o)
 LIBX = -lmlx -lm -lft -L libft/ -L ./minilibx_macos/ -framework OpenGL -framework AppKit
 LIBXL = -lm -L libft/ -lft -L/usr/lib/X11 -lmlx -lXext -lX11

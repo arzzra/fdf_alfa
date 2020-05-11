@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 16:09:29 by arz               #+#    #+#             */
-/*   Updated: 2020/05/09 00:01:16 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/12 02:06:43 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ret_min(int a, int b)
 {
-	return (a >= b ? b: a);
+	return (a >= b ? b : a);
 }
 
 t_coord	init_points(t_fdf *data, int x, int y)

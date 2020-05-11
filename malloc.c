@@ -6,12 +6,11 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 02:57:39 by arz               #+#    #+#             */
-/*   Updated: 2020/05/09 00:08:15 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/10 16:55:30 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
-
 
 t_map	*malloc_t_map(void)
 {
@@ -38,7 +37,9 @@ t_cam	*malloc_t_cam(void)
 
 	if ((cm = (t_cam*)malloc(sizeof(t_cam))))
 	{
+		cm->click = 0;
 		cm->zoom = 1;
+		cm->z_deep = 1;
 		cm->x_move = 0;
 		cm->y_move = 0;
 		cm->x_angle = 0;
@@ -64,7 +65,7 @@ t_fdf	*malloc_t_fdf(void)
 		data->mlx_pntr = NULL;
 		data->win_pntr = NULL;
 		if ((data->map = malloc_t_map()))
-			return(data);
+			return (data);
 	}
 	return (NULL);
 }

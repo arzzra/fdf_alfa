@@ -1,6 +1,14 @@
-//
-// Created by ARZ on 03.05.2020.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_matrix.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/07 23:08:43 by arz               #+#    #+#             */
+/*   Updated: 2020/05/09 00:01:03 by arz              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "./includes/fdf.h"
 
@@ -37,10 +45,7 @@ void	list_to_matrix(int *matrix, t_list *lst, int x_size)
 	}
 }
 
-
-
-
-int 	create_matrix(t_fdf *data, t_list *lsk)
+int		create_matrix(t_fdf *data, t_list *lsk)
 {
 	int		**matrix;
 	int		i;
