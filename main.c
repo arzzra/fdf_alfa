@@ -53,9 +53,9 @@ void	print_menu(t_fdf *data)
 	mlx_string_put(data->mlx_pntr, data->win_pntr, 10, 35, 0x03fc35, menu);
 	menu = "i : isometry";
 	mlx_string_put(data->mlx_pntr, data->win_pntr, 10, 50, 0x03fc35, menu);
-	menu = "<, > : color change";
+	menu = "c : color change";
 	mlx_string_put(data->mlx_pntr, data->win_pntr, 10, 65, 0x03fc35, menu);
-	menu = "4, 5, 6: deep change";
+	menu = "<, >: deep change";
 	mlx_string_put(data->mlx_pntr, data->win_pntr, 10, 80, 0x03fc35, menu);
 }
 
