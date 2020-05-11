@@ -12,9 +12,6 @@
 
 #include "./includes/fdf.h"
 
-
-
-
 static void	isometria(t_fdf *data, t_coord *crd)
 {
 	int prev_x;
@@ -34,37 +31,42 @@ static void	isometria(t_fdf *data, t_coord *crd)
 	}
 }
 
-
-void	x_rotate(t_fdf *data, t_coord *crd)
+void		x_rotate(t_fdf *data, t_coord *crd)
 {
 	int prev_y;
 
 	prev_y = crd->y;
-	crd->y = prev_y * cos(data->cam->x_angle) + crd->z * sin(data->cam->x_angle);
-	crd->z = -1 * prev_y * sin(data->cam->x_angle) + crd->z * cos(data->cam->x_angle);
+	crd->y = prev_y * cos(data->cam->x_angle) +
+		crd->z * sin(data->cam->x_angle);
+	crd->z = -1 * prev_y * sin(data->cam->x_angle) +
+		crd->z * cos(data->cam->x_angle);
 }
 
-void	y_rotate(t_fdf *data, t_coord *crd)
+void		y_rotate(t_fdf *data, t_coord *crd)
 {
 	int prev_x;
 
 	prev_x = crd->x;
-	crd->x = prev_x * cos(data->cam->y_angle) + crd->z * sin(data->cam->y_angle);
-	crd->z = -1 * prev_x * sin(data->cam->x_angle) + crd->z * cos(data->cam->x_angle);
+	crd->x = prev_x * cos(data->cam->y_angle) +
+		crd->z * sin(data->cam->y_angle);
+	crd->z = -1 * prev_x * sin(data->cam->x_angle) +
+		crd->z * cos(data->cam->x_angle);
 }
 
-void	z_rotate(t_fdf *data, t_coord *crd)
+void		z_rotate(t_fdf *data, t_coord *crd)
 {
 	int prev_x;
 	int prev_y;
 
 	prev_x = crd->x;
 	prev_y = crd->y;
-	crd->x = prev_x * cos(data->cam->z_angle) - prev_y * sin(data->cam->z_angle);
-	crd->y = prev_x * sin(data->cam->z_angle) + prev_y * cos(data->cam->z_angle);
+	crd->x = prev_x * cos(data->cam->z_angle) -
+		prev_y * sin(data->cam->z_angle);
+	crd->y = prev_x * sin(data->cam->z_angle) +
+		prev_y * cos(data->cam->z_angle);
 }
 
-void	img_projection(t_fdf *data, t_coord *crd)
+void		img_projection(t_fdf *data, t_coord *crd)
 {
 	crd->x *= data->cam->zoom;
 	crd->y *= data->cam->zoom;
@@ -77,5 +79,6 @@ void	img_projection(t_fdf *data, t_coord *crd)
 	if (data->cam->isometria > 0)
 		isometria(data, crd);
 	crd->x += (X_S_WIN) / 2 + data->cam->x_move;
-	crd->y += (Y_S_WIN + data->map->y_size * data->cam->zoom) / 3 + data->cam->y_move;
+	crd->y += (Y_S_WIN + data->map->y_size * data->cam->zoom) /
+		3 + data->cam->y_move;
 }

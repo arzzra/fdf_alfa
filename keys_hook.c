@@ -12,18 +12,18 @@
 
 #include "./includes/fdf.h"
 
-
-void 	zoom(int key, t_fdf *data)
+void	zoom(int key, t_fdf *data)
 {
 	int cur_zoom;
 	int zoom_val;
 
 	zoom_val = 5;
 	cur_zoom = data->cam->zoom;
-	if ((cur_zoom <= 5 && (key == ZOOM_MINUS_L || key == ZOOM_MINUS_M || key == 5))
-			|| (cur_zoom >= 100 && (key == ZOOM_PLUS_L || key == ZOOM_PLUS_M
-				||  key == 4)))
-		return;
+	if ((cur_zoom <= 5 &&
+			(key == ZOOM_MINUS_L || key == ZOOM_MINUS_M || key == 5))
+				|| (cur_zoom >= 100 && (key == ZOOM_PLUS_L || key == ZOOM_PLUS_M
+					|| key == 4)))
+		return ;
 	if (key == ZOOM_PLUS_L || key == ZOOM_PLUS_M || key == 4)
 		data->cam->zoom += zoom_val;
 	else if (key == ZOOM_MINUS_L || key == ZOOM_MINUS_M || key == 5)
@@ -34,14 +34,14 @@ void 	zoom(int key, t_fdf *data)
 	draw(data);
 }
 
-void 	spin(int key, t_fdf *data)
+void	spin(int key, t_fdf *data)
 {
 	float spin_val;
 
 	spin_val = 0.05;
 	if (key == NUMPAD_8_L || key == NUMPAD_8_M)
 		data->cam->x_angle -= spin_val;
-	else if (key == NUMPAD_2_L|| key == NUMPAD_2_M)
+	else if (key == NUMPAD_2_L || key == NUMPAD_2_M)
 		data->cam->x_angle += spin_val;
 	else if (key == NUMPAD_4_L || key == NUMPAD_4_M)
 		data->cam->y_angle -= spin_val;
@@ -60,36 +60,10 @@ void 	spin(int key, t_fdf *data)
 	draw(data);
 }
 
-void	isometry(t_fdf *data)
-{
-	if (data->cam->isometria >= 0 && data->cam->isometria < 2)
-		data->cam->isometria += 1;
-	else
-		data->cam->isometria = 0;
-	data->cam->x_angle = 0;
-	data->cam->y_angle = 0;
-	data->cam->z_angle = 0;
-	draw(data);
-}
-
-int 	change_color(t_fdf *data)
-{
-	int color;
-
-	color = data->map->color_id;
-	if (color == 4)
-		data->map->color_id = 0;
-	else
-		data->map->color_id += 1;
-	draw(data);
-	return (0);
-}
-
-int move(int key, t_fdf *data)
+int		move(int key, t_fdf *data)
 {
 	int move_val;
 
-	printf("data->cam->x_move -- %d ----- data->cam->y_move -- %d\n", data->cam->x_move, data->cam->y_move);
 	move_val = 6;
 	if (key == UP_M || key == UP_L)
 		data->cam->y_move -= move_val;
@@ -99,12 +73,11 @@ int move(int key, t_fdf *data)
 		data->cam->x_move -= move_val;
 	else
 		data->cam->x_move += move_val;
-	printf("data->cam->x_move -- %d ----- data->cam->y_move -- %d\n", data->cam->x_move, data->cam->y_move);
 	draw(data);
 	return (0);
 }
 
-int change_deep(int key, t_fdf *data)
+int		change_deep(int key, t_fdf *data)
 {
 	float deep_val;
 	float cur_deep;
@@ -114,7 +87,7 @@ int change_deep(int key, t_fdf *data)
 	printf("data->cam->z_deep -- %f \n", cur_deep);
 	if (cur_deep >= 10.0 && (key == DEEP_MINUS_L || key == DEEP_MINUS_M))
 		return (0);
-	if (cur_deep <= 0.1  && (key == DEEP_PLUS_L || key == DEEP_PLUS_M))
+	if (cur_deep <= 0.1 && (key == DEEP_PLUS_L || key == DEEP_PLUS_M))
 		return (0);
 	if (key == DEEP_PLUS_L || key == DEEP_PLUS_M)
 		data->cam->z_deep -= deep_val;
@@ -126,7 +99,6 @@ int change_deep(int key, t_fdf *data)
 
 int		keys_hook(int key, t_fdf *data)
 {
-	printf("keys = %d \n", key);
 	if (key == ESC_L || key == ESC_M)
 		exit(0);
 	else if (key == DEEP_MINUS_L || key == DEEP_MINUS_M ||

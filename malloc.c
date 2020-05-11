@@ -12,7 +12,6 @@
 
 #include "./includes/fdf.h"
 
-
 t_map	*malloc_t_map(void)
 {
 	t_map	*mp;
@@ -66,7 +65,7 @@ t_fdf	*malloc_t_fdf(void)
 		data->mlx_pntr = NULL;
 		data->win_pntr = NULL;
 		if ((data->map = malloc_t_map()))
-			return(data);
+			return (data);
 	}
 	return (NULL);
 }

@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/06 02:57:39 by arz               #+#    #+#             */
+/*   Updated: 2020/05/10 16:55:30 by arz              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "./includes/fdf.h"
 
 int		counter_digits(char *line)
 {
-	int 	i;
-	int 	counter;
-	int		flg;
+	int	i;
+	int	counter;
+	int	flg;
 
 	i = 0;
 	counter = 0;
@@ -80,9 +91,9 @@ t_list	*save_on_list(int fd, t_fdf *data)
 	return (ret);
 }
 
-int 	read_file(t_fdf *data, char *f_name)
+int		read_file(t_fdf *data, char *f_name)
 {
-	int 	fd;
+	int		fd;
 	t_list	*lst;
 
 	if ((fd = open(f_name, O_RDONLY)) > 1)
@@ -97,7 +108,6 @@ int 	read_file(t_fdf *data, char *f_name)
 		free_lst(lst);
 		return (1);
 	}
-    printf("Error! Bad name file\n");
+	printf("Error! Bad name file\n");
 	exit(1);
-	return (0);
 }

@@ -12,7 +12,6 @@
 
 #include "./includes/fdf.h"
 
-
 int		*putcolor(int a, int b, int c)
 {
 	int		*color;
@@ -77,7 +76,8 @@ double	t_calculate(int a, int b, int c)
 		return ((double)chis / znam);
 }
 
-int		linear_interpolation(t_coord *start, t_coord *end, int *x_y_current, int *delta)
+int		linear_interpolation(t_coord *start, t_coord *end,
+	int *x_y_current, int *delta)
 {
 	int		color[3];
 	int		color2;

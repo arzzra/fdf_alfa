@@ -12,23 +12,8 @@
 
 #include "./includes/fdf.h"
 
-//void	init_background(t_fdf *data)
-//{
-//	int		*img_adrr;
-//	int		i;
-//	int		color;
-//
-//	img_adrr = (int*)data->data_addr;
-//	i = 0;
-//	color = 0x0;
-//	while (i < X_S_WIN * Y_S_WIN)
-//	{
-//		img_adrr[i] = color;
-//		i++;
-//	}
-//}
-
-static void	init_delta_error_sign(t_coord *a, t_coord *b, int *delta, int *sign, int *error)
+static void	init_delta_error_sign(t_coord *a, t_coord *b,
+	int *delta, int *sign, int *error)
 {
 	delta[0] = abs(b->x - a->x);
 	delta[1] = abs(b->y - a->y);
@@ -40,9 +25,7 @@ static void	init_delta_error_sign(t_coord *a, t_coord *b, int *delta, int *sign,
 void		pixel_putting(t_fdf *data, int *x_y, int color)
 {
 	int		pos;
-//	if (x_y[0] >= 0 && x_y[0] < X_S_WIN && x_y[1] >= 0 && x_y[1] < Y_S_WIN)
-	// mlx_pixel_put(data->mlx_pntr, data->win_pntr, 0, 0, 0x222222);
-	//printf("status --- %d\n",x_y[0] >= 0 && x_y[0] < X_S_WIN && x_y[1] >= 0 && x_y[1] < Y_S_WIN);
+
 	if (x_y[0] >= 0 && x_y[0] < X_S_WIN && x_y[1] >= 0 && x_y[1] < Y_S_WIN)
 	{
 		pos = (x_y[0] * data->b_p_p / 8) + (x_y[1] * data->size_line);
@@ -78,24 +61,24 @@ void		paint_line(t_fdf *data, t_coord a, t_coord b)
 	}
 }
 
-void	draw(t_fdf *data)
+void		draw(t_fdf *data)
 {
 	int		x;
 	int		y;
 
-//	mlx_clear_window(data->mlx_pntr, data->win_pntr);
-	ft_bzero(data->data_addr, X_S_WIN * Y_S_WIN * (data->b_p_p/8));
+	ft_bzero(data->data_addr, X_S_WIN * Y_S_WIN * (data->b_p_p / 8));
 	y = 0;
-	printf("xsize -- %d ysize -- %d\n", data->map->x_size, data->map->y_size);
 	while (y < data->map->y_size)
 	{
 		x = 0;
 		while (x < data->map->x_size)
 		{
 			if (x < data->map->x_size - 1)
-				paint_line(data, init_points(data, x, y), init_points(data, x + 1, y));
+				paint_line(data, init_points(data, x, y),
+					init_points(data, x + 1, y));
 			if (y < data->map->y_size - 1)
-				paint_line(data, init_points(data, x, y), init_points(data, x, y + 1));
+				paint_line(data, init_points(data, x, y),
+					init_points(data, x, y + 1));
 			x++;
 		}
 		y++;
