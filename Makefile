@@ -6,11 +6,11 @@
 #    By: arz <arz@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/26 16:23:46 by cdemetra          #+#    #+#              #
-#    Updated: 2020/05/13 00:00:10 by arz              ###   ########.fr        #
+#    Updated: 2020/05/13 00:06:08 by arz              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = lem-in
+NAME = fdf
 
 FLAGS = -Wall -Wextra -Werror
 LIB_DIR = libft/
