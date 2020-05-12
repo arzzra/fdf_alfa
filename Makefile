@@ -5,44 +5,74 @@
 #                                                     +:+ +:+         +:+      #
 #    By: arz <arz@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/05/05 17:10:24 by arz               #+#    #+#              #
-#    Updated: 2020/05/11 23:25:44 by arz              ###   ########.fr        #
+#    Created: 2020/01/26 16:23:46 by cdemetra          #+#    #+#              #
+#    Updated: 2020/05/13 00:00:10 by arz              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fdf
-CFLAGS = -Wall -Wextra
-SRC = main.c read_file.c create_matrix.c draw.c  f_free.c img_projection.c \
-		init.c malloc.c some_function.c keys_hook.c color.c keys_hook_additional.c
-OBJ = $(SRC:.c=.o)
+NAME = lem-in
+
+FLAGS = -Wall -Wextra -Werror
+LIB_DIR = libft/
+HEADER_DIR = includes/
+
+LIB = -L ./libft -lft
+LIBPATH = libft/
+
 LIBX = -lmlx -lm -lft -L libft/ -L ./minilibx_macos/ -framework OpenGL -framework AppKit
 LIBXL = -lm -L libft/ -lft -L/usr/lib/X11 -lmlx -lXext -lX11
 
+#################### FDF SOURCE FILES ####################
+SRC = main.c read_file.c create_matrix.c draw.c  f_free.c img_projection.c \
+		init.c malloc.c some_function.c keys_hook.c color.c keys_hook_additional.c
 
-all : $(NAME)
+SRC_DIR = sources/
+######################################################
 
-.PHONY : linux libft clean fclean re norme
+RED			=	\033[0;31m
+YELLOW		=	\x1B[93m
+GREEN		=	\033[0;32m
+NC			=	\033[0m
+NC1			=	\033[5m
+COOL		=	\033[38;5;206;48;5;57m
+ANTS		=	\033[38;05;107m
+COOL2		=	\033[01;38;05;97m
+LAGUNA		=	\033[01;38;05;51m
+ORANGE		=	\x1B[38;5;208m
+PURPLE		= 	\033[01;38;05;129m
 
-$(NAME) : libft
-	@echo "Creating MAC executable $(NAME) ..."
-	@gcc $(CFLAGS) -c $(SRC)
-	@gcc -o $(NAME) $(OBJ) $(LIBX)
+OBJ = $(patsubst %.c,%.o,$(SRC))
 
-linux: libft
-	@echo "Creating LINUX executable $(NAME) ..."
-	@gcc $(CFLAGS) -c $(SRC)
-	@gcc -no-pie -o $(NAME) $(OBJ) $(LIBXL)
+OBJ_DIR = obj/
 
-libft:
-	@make -C libft fclean
-	@make -C libft
+.PHONY: all clean fclean re
 
-clean :
-	@echo "Removing object files ..."
-	@rm -f $(OBJ)
+all: $(NAME)
 
-fclean : clean
-	@echo "Removing $(NAME) ..."
-	@rm -f $(NAME)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@mkdir -p $(OBJ_DIR)
+	@gcc $(FLAGS) -c $< -o $@ -I $(HEADER_DIR)
 
-re : fclean all
+$(NAME): $(addprefix $(OBJ_DIR),$(OBJ))
+	@make -C $(LIBPATH)
+	@gcc $(FLAGS) $(addprefix $(OBJ_DIR),$(OBJ)) $(LIB) $(LIBX) -o $(NAME)
+	@echo "✅  $(ANTS)FDF Created from Mac!$(NC) ✅							       $(COOL2)❒$(NC)"
+
+linux:	$(addprefix $(OBJ_DIR),$(OBJ))
+	@make -C $(LIBPATH)
+	@gcc -no-pie $(FLAGS) $(addprefix $(OBJ_DIR),$(OBJ)) $(LIB) $(LIBXL) -o $(NAME)
+	@echo "✅  $(ANTS)FDF Created from Linux!$(NC) ✅							       $(COOL2)❒$(NC)"
+
+clean:
+		@echo "$(RED)deleting FDF object files...$(NC) ✔"
+		@echo "$(RED)------------------------------$(NC)"
+		@make -C $(LIBPATH) clean
+		@rm -Rf $(OBJ_DIR)
+
+fclean: clean
+		@echo "$(RED)deleting FDF ...$(NC) ✔"
+		@echo "$(RED)---------------------------$(NC)"
+		@make -C $(LIBPATH) fclean
+		@rm -f $(NAME)
+
+re: fclean all
