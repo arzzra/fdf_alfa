@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 01:59:08 by arz               #+#    #+#             */
-/*   Updated: 2020/05/12 23:57:52 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/13 01:02:12 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int		change_deep(int key, t_fdf *data)
 
 	deep_val = 0.05;
 	cur_deep = data->cam->z_deep;
-	printf("data->cam->z_deep -- %f \n", cur_deep);
 	if (cur_deep >= 10.0 && (key == DEEP_MINUS_L || key == DEEP_MINUS_M))
 		return (0);
 	if (cur_deep <= 0.1 && (key == DEEP_PLUS_L || key == DEEP_PLUS_M))

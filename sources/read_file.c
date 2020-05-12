@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 02:57:39 by arz               #+#    #+#             */
-/*   Updated: 2020/05/12 23:57:52 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/13 00:58:05 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int		counter_digits(char *line)
 	int	counter;
 	int	flg;
 
-	i = 0;
+	i = -1;
 	counter = 0;
 	flg = 0;
-	while (line[i] != '\0')
+	while (line[++i] != '\0')
 	{
 		if ((line[i] >= '0' && line[i] <= '9') || line[i] == '-')
 		{
@@ -37,7 +37,6 @@ int		counter_digits(char *line)
 			flg = 0;
 		else
 			return (-1);
-		i++;
 	}
 	return (counter);
 }

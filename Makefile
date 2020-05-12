@@ -6,7 +6,7 @@
 #    By: arz <arz@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/26 16:23:46 by cdemetra          #+#    #+#              #
-#    Updated: 2020/05/13 00:40:51 by arz              ###   ########.fr        #
+#    Updated: 2020/05/13 00:46:28 by arz              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ COOL		=	\033[38;5;206;48;5;57m
 ANTS		=	\033[38;05;107m
 COOL2		=	\033[01;38;05;97m
 LAGUNA		=	\033[01;38;05;51m
-ORANGE		=	\x1B[38;5;208m
+ORANGE		=	\033[38;5;208m
 PURPLE		= 	\033[01;38;05;129m
 
 OBJ = $(patsubst %.c,%.o,$(SRC))
@@ -68,7 +68,7 @@ $(MINILIBX):
 linux: $(addprefix $(OBJ_DIR),$(OBJ))
 	@make -C $(LIBPATH)
 	@gcc -no-pie $(FLAGS) $(addprefix $(OBJ_DIR),$(OBJ)) $(LIB) $(LIBXL) -o $(NAME)
-	@echo "✅  $(ANTS)FDF Created from Linux!$(NC) ✅							       $(COOL2)❒$(NC)"
+	@echo "✅  $(ORANGE)FDF Created from Linux!$(NC) ✅							       $(COOL2)❒$(NC)"
 
 clean:
 		@echo "$(RED)deleting object files...$(NC) ✔"
