@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_int2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdemetra <cdemetra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 16:20:20 by cdemetra          #+#    #+#             */
-/*   Updated: 2019/09/23 21:47:54 by cdemetra         ###   ########.fr       */
+/*   Updated: 2020/05/13 00:18:50 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 void	ft_print_di_neg(t_qualfrs *ql)
 {
-	t_flag		*fl;
-	t_length	*len;
-
-	fl = ql->flg;
-	len = ql->len;
 	ql->countchr += write(1, &MINUS, 1);
 	if (ql->prcs > ql->countnum)
 	{
@@ -37,11 +32,9 @@ void	ft_print_di_neg(t_qualfrs *ql)
 void	ft_print_di_pos(t_qualfrs *ql)
 {
 	t_flag		*fl;
-	t_length	*len;
 	int			plus;
 
 	fl = ql->flg;
-	len = ql->len;
 	plus = fl->plus || fl->space ? 1 : 0;
 	if (fl->space > 0 && fl->plus == 0)
 		ft_print_space(1, ql);
@@ -76,10 +69,8 @@ void	ft_print_di_neg2(t_qualfrs *ql)
 void	ft_print_di_pos2(t_qualfrs *ql)
 {
 	t_flag		*fl;
-	t_length	*len;
 
 	fl = ql->flg;
-	len = ql->len;
 	if (fl->space > 0 && fl->plus == 0)
 		ft_print_space(1, ql);
 	else if (fl->plus > 0)

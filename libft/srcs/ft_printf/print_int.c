@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 12:47:10 by cdemetra          #+#    #+#             */
-/*   Updated: 2020/05/05 17:43:15 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/13 00:19:59 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,8 @@ void	ft_print_di_neg4(t_qualfrs *ql)
 void	ft_print_di_pos4(t_qualfrs *ql)
 {
 	t_flag		*fl;
-	t_length	*len;
-	int			plus;
 
 	fl = ql->flg;
-	len = ql->len;
-	plus = fl->plus > 0 ? 1 : 0;
 	if (fl->space > 0 && fl->plus == 0)
 		ft_print_space(1, ql);
 	if (fl->plus > 0)

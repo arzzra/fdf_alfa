@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_ox2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdemetra <cdemetra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 16:29:49 by cdemetra          #+#    #+#             */
-/*   Updated: 2019/09/23 21:50:51 by cdemetra         ###   ########.fr       */
+/*   Updated: 2020/05/13 00:18:50 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,8 @@ void	ft_print_ox(t_qualfrs *ql)
 {
 	unsigned long long	numb;
 	unsigned int		c;
-	t_flag				*fl;
 	t_length			*len;
 
-	fl = ql->flg;
 	len = ql->len;
 	numb = va_arg(ql->ap, unsigned long long);
 	if (len->l > 0 || len->h > 0)

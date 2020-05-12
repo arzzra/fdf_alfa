@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convercions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdemetra <cdemetra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 13:30:19 by cdemetra          #+#    #+#             */
-/*   Updated: 2019/09/23 18:51:55 by cdemetra         ###   ########.fr       */
+/*   Updated: 2020/05/13 00:16:02 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ void	ft_putcharutf8(char c)
 	unsigned char	c2;
 
 	c2 = (unsigned char)c;
-	if (c2 < 0)
-		return ;
 	if (c2 > 0x7F)
 	{
 		wr = (c2 >> 6) | 0xC0;
