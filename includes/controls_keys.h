@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 15:49:09 by arz               #+#    #+#             */
-/*   Updated: 2020/05/10 16:34:13 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/12 02:00:07 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define NUMPAD_2_L 65433
 # define NUMPAD_3_L 65435
 # define NUMPAD_4_L 65430
-# define NUMPAD_5_L 0
+# define NUMPAD_5_L 65437
 # define NUMPAD_6_L 65432
 # define NUMPAD_8_L 65431
 # define NUMPAD_9_L 65434
@@ -50,7 +50,7 @@
 # define DOWN_L 65364
 # define LEFT_L 65361
 # define RIGHT_L 65363
-# define ESC_L 53
+# define ESC_L 65307
 # define ISOMETRY_L 105
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 02:57:39 by arz               #+#    #+#             */
-/*   Updated: 2020/05/10 16:55:30 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/12 02:05:58 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int		counter_digits(char *line)
 		}
 		else if (line[i] == ' ')
 			flg = 0;
+		else
+			return (0);
 		i++;
 	}
 	return (counter);
@@ -100,14 +102,18 @@ int		read_file(t_fdf *data, char *f_name)
 	{
 		if (!(lst = save_on_list(fd, data)))
 		{
-			printf("Error read\n");
+			ft_printf("Error read from file\n");
 			return (0);
 		}
 		if (!(create_matrix(data, lst)))
+		{
+			ft_printf("Error init map\n");
 			return (0);
+		}
 		free_lst(lst);
+		close(fd);
 		return (1);
 	}
-	printf("Error! Bad name file\n");
+	ft_printf("Error! Bad file name\n");
 	exit(1);
 }

@@ -6,20 +6,19 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/05 18:07:24 by arz               #+#    #+#             */
-/*   Updated: 2020/05/08 20:04:14 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/12 01:42:06 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
 
 static void	init_delta_error_sign(t_coord *a, t_coord *b,
-	int *delta, int *sign, int *error)
+	int *delta, int *sign)
 {
 	delta[0] = abs(b->x - a->x);
 	delta[1] = abs(b->y - a->y);
 	sign[0] = a->x < b->x ? 1 : -1;
 	sign[1] = a->y < b->y ? 1 : -1;
-	error[0] = delta[0] - delta[1];
 }
 
 void		pixel_putting(t_fdf *data, int *x_y, int color)
@@ -42,9 +41,10 @@ void		paint_line(t_fdf *data, t_coord a, t_coord b)
 	int		sign[2];
 	int		x_y[2];
 
-	init_delta_error_sign(&a, &b, delta, sign, error);
+	init_delta_error_sign(&a, &b, delta, sign);
 	x_y[0] = a.x;
 	x_y[1] = a.y;
+	error[0] = delta[0] - delta[1];
 	while (x_y[0] != b.x || x_y[1] != b.y)
 	{
 		pixel_putting(data, x_y, linear_interpolation(&a, &b, x_y, delta));

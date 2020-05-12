@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 01:59:08 by arz               #+#    #+#             */
-/*   Updated: 2020/05/10 17:29:11 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/12 01:51:03 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		change_color(t_fdf *data)
 	int color;
 
 	color = data->map->color_id;
-	if (color == 4)
+	if (color == 5)
 		data->map->color_id = 0;
 	else
 		data->map->color_id += 1;

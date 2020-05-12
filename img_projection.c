@@ -6,19 +6,20 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 15:55:48 by arz               #+#    #+#             */
-/*   Updated: 2020/05/10 17:15:55 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/12 01:41:46 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
 
-static void	isometria(t_fdf *data, t_coord *crd)
+static void	isometria(t_fdf *data, t_coord *crd, int *x)
 {
 	int prev_x;
 	int prev_y;
 
 	prev_x = crd->x;
 	prev_y = crd->y;
+	*x = 2;
 	if (data->cam->isometria == 1)
 	{
 		crd->x = (prev_x - prev_y) * cos(0.523599);
@@ -68,6 +69,9 @@ void		z_rotate(t_fdf *data, t_coord *crd)
 
 void		img_projection(t_fdf *data, t_coord *crd)
 {
+	int		x;
+
+	x = 3;
 	crd->x *= data->cam->zoom;
 	crd->y *= data->cam->zoom;
 	crd->z *= (data->cam->zoom / data->cam->z_deep);
@@ -77,8 +81,8 @@ void		img_projection(t_fdf *data, t_coord *crd)
 	y_rotate(data, crd);
 	z_rotate(data, crd);
 	if (data->cam->isometria > 0)
-		isometria(data, crd);
+		isometria(data, crd, &x);
 	crd->x += (X_S_WIN) / 2 + data->cam->x_move;
 	crd->y += (Y_S_WIN + data->map->y_size * data->cam->zoom) /
-		3 + data->cam->y_move;
+		x + data->cam->y_move;
 }
