@@ -6,3 +6,4 @@ libft/libft.a
 libft/objects/additional.o
 *.o
 *.a
+Makefile1

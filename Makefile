@@ -10,38 +10,70 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fdf
-CFLAGS = -Wall -Wextra
-SRC = main.c read_file.c create_matrix.c draw.c  f_free.c img_projection.c init.c malloc.c some_function.c keys_hook.c color.c
-OBJ = $(SRC:.c=.o)
-LIBX = -lmlx -lm -lft -L libft/ -L ./minilibx_macos/ -framework OpenGL -framework AppKit
-LIBXL = -lm -L libft/ -lft -L/usr/lib/X11 -lmlx -lXext -lX11
+NAME	= fdf
+
+SRC		= main.c \
+          read_file.c \
+          create_matrix.c \
+          draw.c \
+          f_free.c \
+          img_projection.c \
+          init.c \
+          malloc.c \
+          some_function.c \
+          keys_hook.c \
+          color.c
+
+OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
+
+CC		= gcc
+CFLAGS	= -Wall -Wextra -Werror -g
+
+MINILIBX		= ./minilibx_macos/
+MINILIBX_LIB	= $(addprefix $(MINILIBX),mlx.a)
+MINILIBX_INC	= -I ./miniLibX
+MINILIBX_LIBX	= -L ./miniLibX -l mlx -framework OpenGL -framework AppKit
+MINILIBX_LIBXL = -lm -L libft/ -lft -L/usr/lib/X11 -lmlx -lXext -lX11
+
+# ft library
+LIBFT		= ./libft/
+LIBFT_LIB	= $(addprefix $(LIBFT),libft.a)
+LIBFT_INC	= -I ./libft
+LIBFT_LNK	= -L ./libft -l ft
+
+# directories
+SRCDIR	= ./src/
+INCDIR	= ./includes/
+OBJDIR	= ./obj/
+
+all: obj $(LIBFT_LIB) $(MINILIBX_LIB) $(NAME)
 
 
-all : $(NAME)
+obj:
+	mkdir -p $(OBJDIR)
 
-.PHONY : linux libft clean fclean re norme
+$(OBJDIR)%.o:$(SRCDIR)%.c
+	$(CC) $(CFLAGS) $(MINILIBX_INC) $(FT_INC) -I $(INCDIR) -o $@ -c $<
 
-$(NAME) : libft
-	@echo "Creating MAC executable $(NAME) ..."
-	@gcc $(CFLAGS) -c $(SRC)
-	@gcc -o $(NAME) $(OBJ) $(LIBX)
+$(LIBFT_LIB):
+	make -C $(LIBFT)
 
-linux: libft
-	@echo "Creating LINUX executable $(NAME) ..."
-	@gcc $(CFLAGS) -c $(SRC)
-	@gcc -no-pie -o $(NAME) $(OBJ) $(LIBXL)
+$(MINILIBX_LIB):
+	make -C $(MINILIBX)
 
-libft:
-	@make -C libft fclean
-	@make -C libft
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) $(MINILIBX_LIBX) $(LIBFT_LNK) -lm -o $(NAME)
 
-clean :
-	@echo "Removing object files ..."
-	@rm -f $(OBJ)
+# linux: obj $(LIBFT_LIB) $(MINILIBX_LIB)
+#     $(CC) $(OBJ) $(MINILIBX_LIBXL) $(LIBFT_LNK)
 
-fclean : clean
-	@echo "Removing $(NAME) ..."
-	@rm -f $(NAME)
+clean:
+	rm -rf $(OBJDIR)
+	make -C $(LIBFT) clean
+	make -C $(MINILIBX) clean
 
-re : fclean all
+fclean: clean
+	rm -rf $(NAME)
+	make -C $(LIBFT) fclean
+
+re: fclean all
