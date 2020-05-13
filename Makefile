@@ -6,7 +6,18 @@
 #    By: arz <arz@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/26 16:23:46 by cdemetra          #+#    #+#              #
-#    Updated: 2020/05/13 15:56:30 by arz              ###   ########.fr        #
+#    Updated: 2020/05/13 18:24:03 by arz              ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: arz <arz@student.42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/01/26 16:23:46 by cdemetra          #+#    #+#              #
+#    Updated: 2020/05/13 00:46:28 by arz              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,9 +69,12 @@ GREEN = \033[0;32m
 RED = \033[0;31m
 CLEAR = \033[0m
 
-.PHONY: all clean fclean re linux
+.PHONY: all clean fclean re linux linux_re
 
-all: $(NAME)
+all: $(LIBFT) ./libft/libft.a $(NAME)
+
+FORCE:		;
+
 
 $(NAME): $(LIBFT) $(MLX) $(OBJ_DIR) $(OBJECTS)
 	@$(CC) $(FLAGS) $(MLX_FLAGS) $(INCS) $(OBJECTS) -o $(NAME)
@@ -74,8 +88,9 @@ $(OBJ_DIR):
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HDRS)
 	@$(CC) $(FLAGS) -c $(INCS) $< -o $@
 
-$(LIBFT):
+$(LIBFT): FORCE
 	@$(MAKE) -sC $(LIBFT_DIR)
+
 
 $(MLX):
 	@echo "$(GREEN)libmlx.a created...$(CLEAR) ✔"
@@ -108,3 +123,7 @@ fclean: clean
 re:
 	@$(MAKE) fclean
 	@$(MAKE) all
+
+linux_re:
+	@$(MAKE) fclean
+	@$(MAKE) linux

@@ -6,7 +6,7 @@
 #    By: arz <arz@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/21 23:08:55 by cdemetra          #+#    #+#              #
-#    Updated: 2020/05/13 16:04:22 by arz              ###   ########.fr        #
+#    Updated: 2020/05/13 18:18:24 by arz              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,7 @@ VPATH =	srcs:srcs/ft_printf
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) includes/libft.h includes/ft_printf.h
 	@ar rc $@ $(OBJS)
 	@ranlib $@
 	@echo "✅  $(GREEN)libft.a Created!$(NC) ✅							       $(COOL2)❒$(NC)"
@@ -90,13 +90,11 @@ HDR = -I./includes
 
 clean:
 	@echo "$(RED)deleting libft object files...$(NC) ✔"
-	@echo "$(RED)------------------------------$(NC)"
 	@/bin/rm -f $(OBJS)
 	@rm -rf $(OBJSFD)
 
 fclean: clean
 	@echo "$(RED)deleting libft.a archive...$(NC) ✔"
-	@echo "$(RED)---------------------------$(NC)"
 	@/bin/rm -f $(NAME)
 
 re: fclean all
