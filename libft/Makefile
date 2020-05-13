@@ -12,7 +12,7 @@
 
 NAME = libft.a
 
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Wextra -Werror
 
 FT_PRINTF =	 ft_printf.c convercions.c length.c\
 		parser.c print_format_csp.c print_int.c\
@@ -76,7 +76,7 @@ VPATH =	srcs:srcs/ft_printf
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) includes/libft.h includes/ft_printf.h
 	@ar rc $@ $(OBJS)
 	@ranlib $@
 	@echo "✅  $(GREEN)libft.a Created!$(NC) ✅							       $(COOL2)❒$(NC)"

@@ -47,15 +47,15 @@ int		**getcolor(void)
 
 int		level_color(t_fdf *data, int z)
 {
-	if (z <= data->_3z && z >= data->min_z)
+	if (z <= data->z3 && z >= data->min_z)
 	{
 		return (data->map->colors[data->map->color_id][0]);
 	}
-	else if (z <= data->_6z && z > data->_3z)
+	else if (z <= data->z6 && z > data->z3)
 	{
 		return (data->map->colors[data->map->color_id][1]);
 	}
-	else if (z >= data->_6z && z > data->_6z)
+	else if (z >= data->z6 && z > data->z6)
 	{
 		return (data->map->colors[data->map->color_id][2]);
 	}

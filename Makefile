@@ -59,7 +59,10 @@ CLEAR = \033[0m
 
 .PHONY: all clean fclean re
 
-all: $(NAME)
+all: $(LIBFT) ./libft/libft.a $(NAME)
+
+FORCE:		;
+
 
 $(NAME): $(LIBFT) $(MLX) $(OBJ_DIR) $(OBJECTS)
 	@$(CC) $(FLAGS) $(MLX_FLAGS) $(INCS) $(OBJECTS) -o $(NAME)
@@ -73,8 +76,9 @@ $(OBJ_DIR):
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HDRS)
 	@$(CC) $(FLAGS) -c $(INCS) $< -o $@
 
-$(LIBFT):
+$(LIBFT): FORCE
 	@$(MAKE) -sC $(LIBFT_DIR)
+
 
 $(MLX):
 	@echo "$(GREEN)libmlx.a created...$(CLEAR) ✔"

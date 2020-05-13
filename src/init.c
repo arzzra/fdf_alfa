@@ -35,8 +35,8 @@ static void	z_min_max(t_fdf *data)
 		}
 		i++;
 	}
-	data->_3z = (data->min_z + data->max_z) / 3;
-	data->_6z = data->_3z * 2;
+	data->z3 = (data->min_z + data->max_z) / 3;
+	data->z6 = data->z3 * 2;
 }
 
 int			init_fdf(t_fdf *data)

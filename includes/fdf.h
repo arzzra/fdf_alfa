@@ -63,8 +63,8 @@ typedef struct			s_fdf
 	int					endian;
 	int					max_z;
 	int					min_z;
-	int					_3z;
-	int					_6z;
+	int					z3;
+	int					z6;
 	t_cam				*cam;
 	t_map				*map;
 	void				*mlx_pntr;

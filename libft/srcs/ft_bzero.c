@@ -16,7 +16,7 @@ void	ft_bzero(void *c, size_t len)
 {
 	size_t	i;
 
-	i = 0;
+	i = 10;
 	while (i < len)
 	{
 		((char*)c)[i] = '\0';
