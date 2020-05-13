@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cdemetra <cdemetra@student.42.fr>          +#+  +:+       +#+         #
+#    By: arz <arz@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/21 23:08:55 by cdemetra          #+#    #+#              #
-#    Updated: 2020/02/22 15:45:20 by cdemetra         ###   ########.fr        #
+#    Updated: 2020/05/13 16:04:22 by arz              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Wextra -Werror
 
 FT_PRINTF =	 ft_printf.c convercions.c length.c\
 		parser.c print_format_csp.c print_int.c\

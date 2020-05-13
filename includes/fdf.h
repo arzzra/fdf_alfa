@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 02:56:02 by arz               #+#    #+#             */
-/*   Updated: 2020/05/10 17:20:32 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/13 16:01:22 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ typedef struct			s_fdf
 	int					endian;
 	int					max_z;
 	int					min_z;
-	int					_3z;
-	int					_6z;
+	int					z_3;
+	int					z_6;
 	t_cam				*cam;
 	t_map				*map;
 	void				*mlx_pntr;

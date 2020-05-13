@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 14:54:36 by arz               #+#    #+#             */
-/*   Updated: 2020/05/12 23:57:52 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/13 16:01:22 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static void	z_min_max(t_fdf *data)
 		}
 		i++;
 	}
-	data->_3z = (data->min_z + data->max_z) / 3;
-	data->_6z = data->_3z * 2;
+	data->z_3 = (data->min_z + data->max_z) / 3;
+	data->z_6 = data->z_3 * 2;
 }
 
 int			init_fdf(t_fdf *data)

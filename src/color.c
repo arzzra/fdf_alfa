@@ -6,7 +6,7 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 23:08:43 by arz               #+#    #+#             */
-/*   Updated: 2020/05/12 23:57:52 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/13 16:01:22 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ int		**getcolor(void)
 
 int		level_color(t_fdf *data, int z)
 {
-	if (z <= data->_3z && z >= data->min_z)
+	if (z <= data->z_3 && z >= data->min_z)
 	{
 		return (data->map->colors[data->map->color_id][0]);
 	}
-	else if (z <= data->_6z && z > data->_3z)
+	else if (z <= data->z_6 && z > data->z_3)
 	{
 		return (data->map->colors[data->map->color_id][1]);
 	}
-	else if (z >= data->_6z && z > data->_6z)
+	else if (z >= data->z_6 && z > data->z_6)
 	{
 		return (data->map->colors[data->map->color_id][2]);
 	}

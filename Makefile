@@ -6,82 +6,105 @@
 #    By: arz <arz@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/26 16:23:46 by cdemetra          #+#    #+#              #
-#    Updated: 2020/05/13 00:46:28 by arz              ###   ########.fr        #
+#    Updated: 2020/05/13 15:56:30 by arz              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-FLAGS = -Wall -Wextra -Werror
-LIB_DIR = libft/
-HEADER_DIR = includes/
+LIBFT = $(LIBFT_DIR)libft.a
+LIBFT_DIR = ./libft/
+LIBFT_HDRS = $(LIBFT_DIR)includes/
 
-LIB = -L ./libft -lft
-LIBPATH = libft/
+MLX = $(MLX_DIR)libmlx.a
+MLX_DIR = ./minilibx_macos/
+MLX_HDRS = $(MLX_DIR)
 
-MINILIBX_DIRECTORY = ./minilibx_macos/
-MINILIBX = $(MINILIBX_DIRECTORY)libmlx.a
+CC = gcc
+FLAGS = -Wall -Werror -Wextra -O3
+MLX_FLAGS = -lmlx -lm -lft -L$(LIBFT_DIR) -L$(MLX_DIR) -framework OpenGL -framework AppKit
+LIBXL_FLAGS = -lm -L$(LIBFT_DIR) -lft -L/usr/lib/X11 -lmlx -lXext -lX11
+INCS = -I$(HDRS_DIR) -I$(LIBFT_HDRS) -I$(MLX_HDRS)
 
-LIBX = -lmlx -lm -lft -L libft/ -L ./minilibx_macos/ -framework OpenGL -framework AppKit
-LIBXL = -lm -L libft/ -lft -L/usr/lib/X11 -lmlx -lXext -lX11
 
-#################### FDF SOURCE FILES ####################
-SRC = main.c read_file.c create_matrix.c draw.c  f_free.c img_projection.c \
-		init.c malloc.c some_function.c keys_hook.c color.c keys_hook_additional.c
+SRC_DIR = ./src/
 
-SRC_DIR = sources/
-######################################################
+SRC          = main.c \
+               read_file.c \
+               create_matrix.c \
+               draw.c \
+               f_free.c \
+               img_projection.c \
+               init.c \
+               malloc.c \
+               some_function.c \
+               keys_hook.c \
+               color.c \
+               keys_hook_additional.c
 
-RED			=	\033[0;31m
-YELLOW		=	\x1B[93m
-GREEN		=	\033[0;32m
-NC			=	\033[0m
-NC1			=	\033[5m
-COOL		=	\033[38;5;206;48;5;57m
-ANTS		=	\033[38;05;107m
-COOL2		=	\033[01;38;05;97m
-LAGUNA		=	\033[01;38;05;51m
-ORANGE		=	\033[38;5;208m
-PURPLE		= 	\033[01;38;05;129m
+SRCS = $(addprefix $(SRC_DIR), $(SRC))
 
-OBJ = $(patsubst %.c,%.o,$(SRC))
+OBJ_DIR = objects/
+OBJ = $(patsubst %.c, %.o, $(SRC))
+OBJECTS	= $(addprefix $(OBJ_DIR), $(OBJ))
 
-OBJ_DIR = obj/
+HDR      =  fdf.h\
+	           controls_keys.h
 
-.PHONY: all clean fclean re
+HDRS_DIR = ./includes/
+HDRS = $(addprefix $(HDRS_DIR), $(HDR))
+
+GREEN = \033[0;32m
+RED = \033[0;31m
+CLEAR = \033[0m
+
+.PHONY: all clean fclean re linux
 
 all: $(NAME)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+$(NAME): $(LIBFT) $(MLX) $(OBJ_DIR) $(OBJECTS)
+	@$(CC) $(FLAGS) $(MLX_FLAGS) $(INCS) $(OBJECTS) -o $(NAME)
+	@echo "$(GREEN)objects file created...$(CLEAR) ✔"
+	@echo "$(GREEN)program fdf created...$(CLEAR) ✔"
+
+$(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
-	@gcc $(FLAGS) -c $< -o $@ -I $(HEADER_DIR)
+	@echo "$(GREEN)objects/ created...$(CLEAR) ✔"
 
-$(NAME): $(MINILIBX) $(addprefix $(OBJ_DIR),$(OBJ))
-	@make -C $(LIBPATH)
-	@gcc $(FLAGS) $(addprefix $(OBJ_DIR),$(OBJ)) $(LIB) $(LIBX) -o $(NAME)
-	@echo "✅  $(ANTS)FDF Created from Mac!$(NC) ✅							       $(COOL2)❒$(NC)"
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HDRS)
+	@$(CC) $(FLAGS) -c $(INCS) $< -o $@
 
-$(MINILIBX):
-	@make -sC $(MINILIBX_DIRECTORY)
-	@echo "✅  $(PURPLE)FDF Created MinilibX!$(NC) ✅							       $(COOL2)❒$(NC)"
+$(LIBFT):
+	@$(MAKE) -sC $(LIBFT_DIR)
 
-linux: $(addprefix $(OBJ_DIR),$(OBJ))
-	@make -C $(LIBPATH)
-	@gcc -no-pie $(FLAGS) $(addprefix $(OBJ_DIR),$(OBJ)) $(LIB) $(LIBXL) -o $(NAME)
-	@echo "✅  $(ORANGE)FDF Created from Linux!$(NC) ✅							       $(COOL2)❒$(NC)"
+$(MLX):
+	@echo "$(GREEN)libmlx.a created...$(CLEAR) ✔"
+	@$(MAKE) -sC $(MLX_DIR)
+
+linux: $(LIBFT) $(OBJ_DIR) $(OBJECTS)
+	@$(CC) -no-pie $(FLAGS) $(INCS) $(OBJECTS) -o $(NAME) $(LIBXL_FLAGS)
+	@echo "$(GREEN)objects file created...$(CLEAR) ✔"
+	@echo "$(GREEN)program fdf created...$(CLEAR) ✔"
 
 clean:
-		@echo "$(RED)deleting object files...$(NC) ✔"
-		@echo "$(RED)------------------------------$(NC)"
-		@make -C $(LIBPATH) clean
-		@make -C $(MINILIBX_DIRECTORY) clean
-		@rm -Rf $(OBJ_DIR)
+	@echo "$(RED)deleting object files...$(CLEAR)"
+	@$(MAKE) -sC $(LIBFT_DIR) clean
+	@echo "$(RED)deleting minilibx object files...$(CLEAR) ✔"
+	@$(MAKE) -sC $(MLX_DIR) clean
+	@rm -rf $(OBJ_DIR)
+	@echo "$(RED)all object files deleted$(CLEAR) ✔"
 
 fclean: clean
-		@echo "$(RED)deleting  ...$(NC) ✔"
-		@echo "$(RED)---------------------------$(NC)"
-		@make -C $(LIBPATH) fclean
-		@rm -f $(MINILIBX)
-		@rm -f $(NAME)
+	@echo "$(RED)deleting static library files...$(CLEAR)"
+	@echo "$(RED)deleting libmlx.a file...$(CLEAR) ✔"
+	@rm -f $(MLX)
+	@echo "$(RED)deleting libft.a file...$(CLEAR) ✔"
+	@rm -f $(LIBFT)
+	@echo "$(RED)all static library files deleted$(CLEAR) ✔"
+	@echo "$(RED)deleting fdf program...$(CLEAR)"
+	@rm -f $(NAME)
+	@echo "$(RED)program fdf deleted$(CLEAR) ✔"
 
-re: fclean all
+re:
+	@$(MAKE) fclean
+	@$(MAKE) all
