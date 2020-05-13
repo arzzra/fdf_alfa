@@ -90,13 +90,11 @@ HDR = -I./includes
 
 clean:
 	@echo "$(RED)deleting libft object files...$(NC) ✔"
-	@echo "$(RED)------------------------------$(NC)"
 	@/bin/rm -f $(OBJS)
 	@rm -rf $(OBJSFD)
 
 fclean: clean
 	@echo "$(RED)deleting libft.a archive...$(NC) ✔"
-	@echo "$(RED)---------------------------$(NC)"
 	@/bin/rm -f $(NAME)
 
 re: fclean all

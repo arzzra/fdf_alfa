@@ -1,49 +1,104 @@
-# **************************************************************************** #
+#******************************************************************************#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arz <arz@student.42.fr>                    +#+  +:+       +#+         #
+#    By: vbrazhni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/05/05 17:10:24 by arz               #+#    #+#              #
-#    Updated: 2020/05/11 23:25:44 by arz              ###   ########.fr        #
+#    Created: 2018/07/05 13:39:23 by vbrazhni          #+#    #+#              #
+#    Updated: 2018/07/05 13:39:24 by vbrazhni         ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
+#******************************************************************************#
 
 NAME = fdf
-CFLAGS = -Wall -Wextra
-SRC = main.c read_file.c create_matrix.c draw.c  f_free.c img_projection.c \
-		init.c malloc.c some_function.c keys_hook.c color.c keys_hook_additional.c
-OBJ = $(SRC:.c=.o)
-LIBX = -lmlx -lm -lft -L libft/ -L ./minilibx_macos/ -framework OpenGL -framework AppKit
-LIBXL = -lm -L libft/ -lft -L/usr/lib/X11 -lmlx -lXext -lX11
+
+LIBFT = $(LIBFT_DIR)libft.a
+LIBFT_DIR = ./libft/
+LIBFT_HDRS = $(LIBFT_DIR)includes/
+
+MLX = $(MLX_DIR)libmlx.a
+MLX_DIR = ./minilibx_macos/
+MLX_HDRS = $(MLX_DIR)
+
+CC = gcc
+FLAGS = -Wall -Werror -Wextra -O3
+MLX_FLAGS = -lmlx -lm -lft -L$(LIBFT_DIR) -L$(MLX_DIR) -framework OpenGL -framework AppKit
+INCS = -I$(HDRS_DIR) -I$(LIBFT_HDRS) -I$(MLX_HDRS)
 
 
-all : $(NAME)
+SRC_DIR = ./src/
 
-.PHONY : linux libft clean fclean re norme
+SRC          = main.c \
+               read_file.c \
+               create_matrix.c \
+               draw.c \
+               f_free.c \
+               img_projection.c \
+               init.c \
+               malloc.c \
+               some_function.c \
+               keys_hook.c \
+               color.c \
+               keys_hook_additional.c
 
-$(NAME) : libft
-	@echo "Creating MAC executable $(NAME) ..."
-	@gcc $(CFLAGS) -c $(SRC)
-	@gcc -o $(NAME) $(OBJ) $(LIBX)
+SRCS = $(addprefix $(SRC_DIR), $(SRC))
 
-linux: libft
-	@echo "Creating LINUX executable $(NAME) ..."
-	@gcc $(CFLAGS) -c $(SRC)
-	@gcc -no-pie -o $(NAME) $(OBJ) $(LIBXL)
+OBJ_DIR = objects/
+OBJ = $(patsubst %.c, %.o, $(SRC))
+OBJECTS	= $(addprefix $(OBJ_DIR), $(OBJ))
 
-libft:
-	@make -C libft fclean
-	@make -C libft
+HDR      =  fdf.h\
+	           controls_keys.h
 
-clean :
-	@echo "Removing object files ..."
-	@rm -f $(OBJ)
+HDRS_DIR = ./includes/
+HDRS = $(addprefix $(HDRS_DIR), $(HDR))
 
-fclean : clean
-	@echo "Removing $(NAME) ..."
+GREEN = \033[0;32m
+RED = \033[0;31m
+RESET = \033[0m
+
+.PHONY: all clean fclean re
+
+all: $(NAME)
+
+$(NAME): $(LIBFT) $(MLX) $(OBJ_DIR) $(OBJECTS)
+	@$(CC) $(FLAGS) $(MLX_FLAGS) $(INCS) $(OBJECTS) -o $(NAME)
+	@echo "$(GREEN)objects file created...$(RESET) ✔"
+	@echo "$(GREEN)program fdf created...$(RESET) ✔"
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+	@echo "$(GREEN)objects/ created...$(RESET) ✔"
+
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HDRS)
+	@$(CC) $(FLAGS) -c $(INCS) $< -o $@
+
+$(LIBFT):
+	@$(MAKE) -sC $(LIBFT_DIR)
+
+$(MLX):
+	@echo "$(GREEN)libmlx.a created...$(RESET) ✔"
+	@$(MAKE) -sC $(MLX_DIR)
+
+clean:
+	@echo "$(RED)deleting object files...$(RESET)"
+	@$(MAKE) -sC $(LIBFT_DIR) clean
+	@echo "$(RED)deleting minilibx object files...$(RESET) ✔"
+	@$(MAKE) -sC $(MLX_DIR) clean
+	@rm -rf $(OBJ_DIR)
+	@echo "$(RED)all object files deleted$(RESET) ✔"
+
+fclean: clean
+	@echo "$(RED)deleting static library files...$(RESET)"
+	@echo "$(RED)deleting libmlx.a file...$(RESET) ✔"
+	@rm -f $(MLX)
+	@echo "$(RED)deleting libft.a file...$(RESET) ✔"
+	@rm -f $(LIBFT)
+	@echo "$(RED)all static library files deleted$(RESET) ✔"
+	@echo "$(RED)deleting fdf program...$(RESET)"
 	@rm -f $(NAME)
+	@echo "$(RED)program fdf deleted$(RESET) ✔"
 
-re : fclean all
-
+re:
+	@$(MAKE) fclean
+	@$(MAKE) all
