@@ -6,30 +6,11 @@
 /*   By: arz <arz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 01:59:08 by arz               #+#    #+#             */
-/*   Updated: 2020/05/12 23:57:52 by arz              ###   ########.fr       */
+/*   Updated: 2020/05/13 19:27:58 by arz              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-void	print_map(t_fdf *data)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < data->map->y_size)
-	{
-		j = 0;
-		while (j < data->map->x_size)
-		{
-			printf("%3d", data->map->matrix_map[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-}
 
 int		mouse_scroll(int button, int x, int y, t_fdf *data)
 {
@@ -71,7 +52,7 @@ int		main(int ac, char **av)
 			{
 				draw(data);
 				mlx_hook(data->win_pntr, 2, 1L << 0, keys_hook, data);
-				mlx_hook(data->win_pntr, 4, 0, mouse_scroll, data);
+				mlx_hook(data->win_pntr, 4, 1L << 2, mouse_scroll, data);
 				mlx_loop(data->mlx_pntr);
 			}
 			else
@@ -81,6 +62,8 @@ int		main(int ac, char **av)
 			}
 		}
 	}
+	else
+		ft_printf("Usage ./fdf <map>\n");
 	exit(0);
 	return (0);
 }
